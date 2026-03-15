@@ -109,6 +109,27 @@ created: {YYYY-MM-DD}
 ## Alternatives Considered
 ```
 
+### Plan Approval
+
+```markdown
+---
+id: "{NNN}"
+type: approval
+for-plan: "{NNN}-{type}-{slug}.md"
+status: approved
+created: {YYYY-MM-DD}
+approved-by: orchestrator
+---
+
+## Approval Context
+
+[Which design/brief was approved, at which gate, and by whom]
+
+## Approval Notes
+
+[Any conditions, revisions requested, or notes from the approval conversation]
+```
+
 ### Inbox Message
 
 ```markdown
