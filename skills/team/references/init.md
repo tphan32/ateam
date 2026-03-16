@@ -1,3 +1,8 @@
+---
+name: team-init
+description: .team/ directory initialization — run on first /team invocation in any project
+---
+
 # .team/ Directory Initialization
 
 Run this initialization on the first `/team` invocation in any project.

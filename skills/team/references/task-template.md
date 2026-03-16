@@ -1,3 +1,8 @@
+---
+name: team-task-template
+description: Task file schema and template — used by Team Lead when creating task files
+---
+
 # Task File Template
 
 Create each new task file using this template. Fill in all frontmatter fields.
@@ -20,6 +25,10 @@ retry: 0
 blocked: false
 qa-cycles: 0
 ---
+
+## Project Context
+
+{Package manager, test runner, build system, monorepo layout, off-limits paths — copied from CLAUDE.md or auto-discovered. Specialists must use this and not re-run discovery.}
 
 ## Context
 

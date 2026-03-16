@@ -1,3 +1,8 @@
+---
+name: team-deliverable-template
+description: Deliverable RESULT.md schema — used by all specialists when writing deliverables
+---
+
 # Deliverable Template
 
 Specialists write RESULT.md to `deliverables/submitted/{task-id}/RESULT.md` on completion.
