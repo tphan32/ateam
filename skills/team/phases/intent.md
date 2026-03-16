@@ -24,7 +24,7 @@ a structured brief.
 
 ## Initialization Requirement
 
-Before dispatch: read `skills/team/references/init.md` and ensure `.team/` is initialized.
+Before dispatch: read `~/.claude/skills/team/references/init.md` and ensure `.team/` is initialized.
 
 ## Completion Signal
 

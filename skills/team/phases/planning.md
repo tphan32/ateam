@@ -15,7 +15,7 @@ Team Lead internally manages all specialist dispatches and wave coordination.
 ## Context to Pass
 
 - Paths to all `plan/active/` artifacts (brief, design, all ADRs)
-- Instruction to read `skills/team/references/task-template.md` for task file schema
+- Instruction to read `~/.claude/skills/team/references/task-template.md` for task file schema
 
 ## Execution Waves (Team Lead manages these internally)
 

@@ -33,7 +33,7 @@ shared protocol. Individual agent files add role-specific details on top of this
 ## On Completion
 
 1. Write `deliverables/submitted/{task-id}/RESULT.md`
-   (use schema from `skills/team/references/deliverable-template.md`)
+   (use schema from `~/.claude/skills/team/references/deliverable-template.md`)
 2. Write inbox messages to any peers who need to know (per individual agent instructions)
 3. Notify Team Lead: write to `inbox/team-lead/unread/{task-id}-complete.md`
 
@@ -49,4 +49,4 @@ If blocked mid-task (after starting):
 
 ## Inbox Message Schema
 
-See `skills/team/references/file-conventions.md` for the full inbox message frontmatter schema.
+See `~/.claude/skills/team/references/file-conventions.md` for the full inbox message frontmatter schema.
