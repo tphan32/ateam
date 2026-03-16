@@ -1,5 +1,5 @@
 ---
-name: team
+name: orchestrate
 description: "Orchestrates the full agent team pipeline: intent → design → approval → execution → QA → report. Invoked by /team command."
 ---
 
@@ -16,7 +16,7 @@ Before any phase begins:
 
 ### 1. Initialize .team/
 
-Invoke `Skill("team/references/init")`. If `.team/` does not exist at project root, initialize it now.
+Invoke `Skill("team:init")`. If `.team/` does not exist at project root, initialize it now.
 
 ### 2. Check for incomplete runs
 
@@ -37,7 +37,7 @@ If the feature description argument is empty or unclear, ask once:
 
 ## Phase 1: Intent
 
-Read `skills/team/phases/intent.md` for dispatch instructions.
+Invoke `Skill("team:intent")` for dispatch instructions.
 
 Dispatch `Agent(user-proxy)` with:
 - Feature description
@@ -49,7 +49,7 @@ Wait for brief to be confirmed at `plan/active/{NNN}-brief-{slug}.md`.
 
 ## Phase 2: Design
 
-Read `skills/team/phases/design.md` for dispatch instructions.
+Invoke `Skill("team:design")` for dispatch instructions.
 
 Dispatch `Agent(team-solution-architect)` with:
 - Brief path from Phase 1
@@ -97,11 +97,11 @@ If `revision_count == 3`:
 
 ## Phase 3: Planning + Execution
 
-Read `skills/team/phases/planning.md` for dispatch instructions.
+Invoke `Skill("team:planning")` for dispatch instructions.
 
 Dispatch `Agent(team-lead)` with:
 - All `plan/active/` artifact paths
-- Instruction to invoke `Skill("team/references/task-template")` for task schema
+- Instruction to invoke `Skill("team:task-template")` for task schema
 
 This is a **single long-running Agent call**. Team Lead internally manages all specialist
 dispatches, wave coordination, inbox monitoring, and QA cycles.
@@ -172,7 +172,7 @@ Proceed to Phase 4 (reporting still runs), then end without invoking finishing s
 
 ## Phase 4: Reporting
 
-Read `skills/team/phases/reporting.md` for dispatch instructions.
+Invoke `Skill("team:reporting")` for dispatch instructions.
 
 Dispatch `Agent(team-project-manager)` with all index file paths.
 

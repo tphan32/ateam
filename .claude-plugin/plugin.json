@@ -1,0 +1,5 @@
+{
+  "name": "team",
+  "description": "Agent team workflow plugin for structured multi-agent feature development",
+  "version": "1.0.0"
+}

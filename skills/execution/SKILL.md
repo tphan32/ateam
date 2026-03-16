@@ -13,16 +13,10 @@ shared protocol. Individual agent files add role-specific details on top of this
 ## On Start (every specialist)
 
 1. Read assigned task file: `tasks/ongoing/{task-id}.md` (path provided by Team Lead)
-   - The `## Project Context` section contains stack details (package manager, test runner, monorepo layout). Use it — do not re-run discovery commands.
 2. Check inbox: `inbox/{role}/unread/` — read all messages, move each to `inbox/{role}/read/`
 3. Read relevant design files: `plan/active/`
 4. Read dependency deliverables listed under `## Dependencies Available At` in task file
 5. If blocked before starting: write to `inbox/team-lead/unread/{task-id}-blocked.md`, stop
-
-## Before Any Edit or Write
-
-Confirm you have already `Read` the target file in this session.
-If not, `Read` it first — then edit.
 
 ## Before Writing Code
 
@@ -39,7 +33,7 @@ If not, `Read` it first — then edit.
 ## On Completion
 
 1. Write `deliverables/submitted/{task-id}/RESULT.md`
-   (invoke `Skill("team/references/deliverable-template")` for schema)
+   (invoke `Skill("team:deliverable-template")` for schema)
 2. Write inbox messages to any peers who need to know (per individual agent instructions)
 3. Notify Team Lead: write to `inbox/team-lead/unread/{task-id}-complete.md`
 
@@ -55,4 +49,4 @@ If blocked mid-task (after starting):
 
 ## Inbox Message Schema
 
-Invoke `Skill("team/references/file-conventions")` for the full inbox message frontmatter schema.
+Invoke `Skill("team:file-conventions")` for the full inbox message frontmatter schema.

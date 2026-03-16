@@ -24,7 +24,7 @@ a structured brief.
 
 ## Initialization Requirement
 
-Before dispatch: invoke `Skill("team/references/init")` and ensure `.team/` is initialized.
+Before dispatch: invoke `Skill("team:init")` and ensure `.team/` is initialized.
 
 ## Completion Signal
 
