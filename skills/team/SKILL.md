@@ -16,7 +16,7 @@ Before any phase begins:
 
 ### 1. Initialize .team/
 
-Read `~/.claude/skills/team/references/init.md`. If `.team/` does not exist at project root, initialize it now.
+Invoke `Skill("team/references/init")`. If `.team/` does not exist at project root, initialize it now.
 
 ### 2. Check for incomplete runs
 
@@ -101,7 +101,7 @@ Read `skills/team/phases/planning.md` for dispatch instructions.
 
 Dispatch `Agent(team-lead)` with:
 - All `plan/active/` artifact paths
-- Instruction to read `~/.claude/skills/team/references/task-template.md` for task schema
+- Instruction to invoke `Skill("team/references/task-template")` for task schema
 
 This is a **single long-running Agent call**. Team Lead internally manages all specialist
 dispatches, wave coordination, inbox monitoring, and QA cycles.

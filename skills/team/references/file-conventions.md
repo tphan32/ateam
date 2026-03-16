@@ -1,3 +1,8 @@
+---
+name: team-file-conventions
+description: Complete .team/ data model — file schemas, naming conventions, movement rules
+---
+
 # File Conventions Reference
 
 Complete data model for `.team/` directory. Authoritative reference for file schemas,
