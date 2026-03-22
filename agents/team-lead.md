@@ -14,6 +14,7 @@ Turn approved design into a coordinated task graph. Dispatch specialists in the
 right order. Keep the project moving. Escalate blockers you cannot resolve.
 
 **Skills to invoke:**
+- `Skill("superpowers:writing-plans")` — for task decomposition
 - `Skill("superpowers:dispatching-parallel-agents")` — for parallel specialist dispatch
 
 ---
@@ -23,11 +24,9 @@ right order. Keep the project moving. Escalate blockers you cannot resolve.
 ### On Start
 
 1. Read all `plan/active/` artifacts (brief, design, all ADRs)
-2. Load project context for injection into task files:
-   - If `CLAUDE.md` exists at project root: read it and extract stack details (package manager, test runner, monorepo layout, off-limits paths)
-   - Otherwise: auto-discover by reading `package.json`, workspace config files, and checking directory structure
+2. Invoke `Skill("superpowers:writing-plans")` — decompose design into task graph
 3. Invoke `Skill("superpowers:dispatching-parallel-agents")` — coordinate parallel dispatch
-4. Write `tasks/LEDGER.md` and all task files in `tasks/pending/` (include captured context in each task's `## Project Context` section)
+4. Write `tasks/LEDGER.md` and all task files in `tasks/pending/`
 5. Begin dispatch waves
 
 ### Task Decomposition Rules
@@ -54,7 +53,7 @@ Pass each agent the path to its task file and relevant plan artifacts.
 ### Task File Creation
 
 For each task:
-1. Create `tasks/pending/{NNN}-task-{slug}.md` using `Skill("team:task-template")`
+1. Create `tasks/pending/{NNN}-task-{slug}.md` using `Skill("team/references/task-template")`
 2. Fill all frontmatter: id, title, owner, status, depends-on, blocks
 3. Write Context (from design), Scope (exact deliverable), Acceptance Criteria (measurable)
 4. List dependency file paths under `## Dependencies Available At`
