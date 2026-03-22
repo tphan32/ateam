@@ -54,7 +54,7 @@ Pass each agent the path to its task file and relevant plan artifacts.
 ### Task File Creation
 
 For each task:
-1. Create `tasks/pending/{NNN}-task-{slug}.md` using `Skill("team/references/task-template")`
+1. Create `tasks/pending/{NNN}-task-{slug}.md` using `Skill("team:task-template")`
 2. Fill all frontmatter: id, title, owner, status, depends-on, blocks
 3. Write Context (from design), Scope (exact deliverable), Acceptance Criteria (measurable)
 4. List dependency file paths under `## Dependencies Available At`

@@ -14,11 +14,12 @@ Place the file at `tasks/pending/{NNN}-task-{slug}.md`.
 ---
 id: "{NNN}"
 title: "{Human-readable task title}"
-owner: {db-engineer|backend-engineer|frontend-engineer|ui-ux-designer|qa-engineer}
+owner:
+  { db-engineer|backend-engineer|frontend-engineer|ui-ux-designer|qa-engineer }
 status: pending
 depends-on: []
 blocks: []
-created: {YYYY-MM-DD}
+created: { YYYY-MM-DD }
 started: ~
 completed: ~
 retry: 0

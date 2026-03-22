@@ -39,13 +39,14 @@ If not, `Read` it first — then edit.
 ## On Completion
 
 1. Write `deliverables/submitted/{task-id}/RESULT.md`
-   (invoke `Skill("team/references/deliverable-template")` for schema)
+   (invoke `Skill("team:deliverable-template")` for schema)
 2. Write inbox messages to any peers who need to know (per individual agent instructions)
 3. Notify Team Lead: write to `inbox/team-lead/unread/{task-id}-complete.md`
 
 ## Blocker Protocol
 
 If blocked mid-task (after starting):
+
 1. Document the blocker clearly in an inbox message
 2. Write to `inbox/team-lead/unread/{task-id}-blocked.md`:
    - What you were trying to do
@@ -55,4 +56,4 @@ If blocked mid-task (after starting):
 
 ## Inbox Message Schema
 
-Invoke `Skill("team/references/file-conventions")` for the full inbox message frontmatter schema.
+Invoke `Skill("team:file-conventions")` for the full inbox message frontmatter schema.
