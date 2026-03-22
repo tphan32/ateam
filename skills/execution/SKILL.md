@@ -13,10 +13,16 @@ shared protocol. Individual agent files add role-specific details on top of this
 ## On Start (every specialist)
 
 1. Read assigned task file: `tasks/ongoing/{task-id}.md` (path provided by Team Lead)
+   - The `## Project Context` section contains stack details (package manager, test runner, monorepo layout). Use it — do not re-run discovery commands.
 2. Check inbox: `inbox/{role}/unread/` — read all messages, move each to `inbox/{role}/read/`
 3. Read relevant design files: `plan/active/`
 4. Read dependency deliverables listed under `## Dependencies Available At` in task file
 5. If blocked before starting: write to `inbox/team-lead/unread/{task-id}-blocked.md`, stop
+
+## Before Any Edit or Write
+
+Confirm you have already `Read` the target file in this session.
+If not, `Read` it first — then edit.
 
 ## Before Writing Code
 
@@ -40,6 +46,7 @@ shared protocol. Individual agent files add role-specific details on top of this
 ## Blocker Protocol
 
 If blocked mid-task (after starting):
+
 1. Document the blocker clearly in an inbox message
 2. Write to `inbox/team-lead/unread/{task-id}-blocked.md`:
    - What you were trying to do

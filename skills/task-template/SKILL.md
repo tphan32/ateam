@@ -14,17 +14,22 @@ Place the file at `tasks/pending/{NNN}-task-{slug}.md`.
 ---
 id: "{NNN}"
 title: "{Human-readable task title}"
-owner: {db-engineer|backend-engineer|frontend-engineer|ui-ux-designer|qa-engineer}
+owner:
+  { db-engineer|backend-engineer|frontend-engineer|ui-ux-designer|qa-engineer }
 status: pending
 depends-on: []
 blocks: []
-created: {YYYY-MM-DD}
+created: { YYYY-MM-DD }
 started: ~
 completed: ~
 retry: 0
 blocked: false
 qa-cycles: 0
 ---
+
+## Project Context
+
+{Package manager, test runner, build system, monorepo layout, off-limits paths — copied from CLAUDE.md or auto-discovered. Specialists must use this and not re-run discovery.}
 
 ## Context
 
