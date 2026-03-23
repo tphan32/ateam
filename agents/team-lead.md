@@ -55,10 +55,16 @@ Pass each agent the path to its task file and relevant plan artifacts.
 For each task:
 1. Create `tasks/pending/{NNN}-task-{slug}.md` using `Skill("team/references/task-template")`
 2. Fill all frontmatter: id, title, owner, status, depends-on, blocks
-3. Write Context (from design), Scope (exact deliverable), Acceptance Criteria (measurable)
-4. List dependency file paths under `## Dependencies Available At`
+3. Set `wave` based on dispatch-wave assignment:
+   - Wave 1: `db-engineer` and `ui-ux-designer`
+   - Wave 2: `backend-engineer`
+   - Wave 3: `frontend-engineer`
+   - Wave 4: `qa-engineer`
+4. Initialise `tokens: ~`, `tool-uses: ~`, `duration-ms: ~` in frontmatter
+5. Write Context (from design), Scope (exact deliverable), Acceptance Criteria (measurable)
+6. List dependency file paths under `## Dependencies Available At`
 
-Then write `tasks/LEDGER.md` with all tasks and their full dependency graph.
+Then write `tasks/LEDGER.md` with all tasks and their full dependency graph. Initialise `tokens` and `duration-ms` columns as `~` for every row.
 
 ### On Specialist Completion
 
