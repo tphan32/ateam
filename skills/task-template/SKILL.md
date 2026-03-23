@@ -25,6 +25,10 @@ completed: ~
 retry: 0
 blocked: false
 qa-cycles: 0
+tokens: ~
+tool-uses: ~
+duration-ms: ~
+wave: ~
 ---
 
 ## Project Context
