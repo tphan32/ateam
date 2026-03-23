@@ -76,11 +76,18 @@ When a specialist notifies completion via `inbox/team-lead/unread/`:
      b. If `retry < 2`: increment `retry` in task frontmatter, re-dispatch specialist with same task file
      c. If `retry >= 2`: escalate to SKILL.md orchestrator: `RETRY_EXCEEDED: {task-id}` — do not re-dispatch
      d. **Stop processing this completion** — do not move task file
-2. If RESULT.md exists:
-   a. Move task file: `tasks/ongoing/` → `tasks/completed/`
-   b. Update `LEDGER.md`: status → `completed`, set `completed` date in task frontmatter
-   c. Check LEDGER for tasks whose dependencies are now all completed
-   d. Dispatch next unblocked wave
+2. Extract `total_tokens`, `tool_uses`, `duration_ms` from the `<usage>` block in the completion notification
+3. Write to the task file at `tasks/ongoing/{task-id}.md` (before moving it):
+   - `tokens: {total_tokens}`
+   - `tool-uses: {tool_uses}`
+   - `duration-ms: {duration_ms}`
+4. Update the LEDGER.md row for this task: set `tokens` and `duration-ms` columns to the extracted values
+5. Move task file: `tasks/ongoing/` → `tasks/completed/`
+6. Update `LEDGER.md`: status → `completed`, set `completed` date in task frontmatter
+7. Check LEDGER for tasks whose dependencies are now all completed
+8. Dispatch next unblocked wave
+
+**On QA rejection re-dispatch:** When QA rejects a task and the specialist completes again, steps 2–4 overwrite the token fields with the latest run's values (last-write wins). This is correct — the final delivery's cost is what matters.
 
 ### On QA Completion
 
