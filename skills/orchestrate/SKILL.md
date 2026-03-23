@@ -143,6 +143,8 @@ If `fix design`: Re-dispatch `Agent(team-solution-architect)` with issue context
 After Architect completes: Re-dispatch `Agent(team-lead)` to resume.
 If `override`: Instruct Team Lead to resume with paused tasks.
 
+> Note: Architect tokens from a `fix design` re-dispatch are not captured in any phase accumulator — this is an intentional exclusion. Only Team Lead calls accumulate into `phase3_usage`.
+
 **Regardless of which outcome occurred above:** Capture `<usage>` from the Team Lead Agent call as `phase3_usage` (tokens, tool-uses, duration-ms). If Team Lead is re-dispatched after a design fix, accumulate each call's usage into `phase3_usage`. If `<usage>` is absent, set to zeros.
 
 ---
@@ -216,7 +218,7 @@ Using specialist task data (step 1) and phase usage variables (`phase1_usage`–
 **Most expensive item:** highest-token row across tasks and phases, with percentage of session total
 
 **QA re-run overhead** (omit if no tasks have `qa-cycles > 0`):
-- For each task where `qa-cycles > 0`: estimate re-run cost = `tokens × (qa-cycles / (qa-cycles + 1))`
+- Assumes each run has equal token cost. For each task where `qa-cycles > 0`: estimate rejected-run cost = `tokens × (qa-cycles / (qa-cycles + 1))` (i.e. `rejected_runs / total_runs × final_run_tokens`)
 - Sum all per-task estimates → single aggregate figure; label as estimated
 
 **Wave bottleneck** (only consider waves with ≥ 1 completed task):
@@ -240,6 +242,7 @@ Read the file and append after all existing sections:
 | solution-architect | Phase 2: Design | {N,NNN} | {N} | {Xm Ys} |
 | team-lead | Phase 3: Execution | {N,NNN} | {N} | {Xm Ys} |
 | project-manager | Phase 4: Reporting | {N,NNN} | {N} | {Xm Ys} |
+*(omit any row where phaseN_usage is all zeros due to absent `<usage>`)*
 
 ### By Task
 

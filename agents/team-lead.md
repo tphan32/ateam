@@ -84,9 +84,10 @@ When a specialist notifies completion via `inbox/team-lead/unread/`:
    - `duration-ms: {duration_ms}`
 4. Update the LEDGER.md row for this task: set `tokens` and `duration-ms` columns to the extracted values
 5. Move task file: `tasks/ongoing/` → `tasks/completed/`
-6. Update `LEDGER.md`: status → `completed`, set `completed` date in task frontmatter
-7. Check LEDGER for tasks whose dependencies are now all completed
-8. Dispatch next unblocked wave
+6. Update `LEDGER.md` row: set status → `completed`
+7. Update task file frontmatter: set `completed: {YYYY-MM-DD}`
+8. Check LEDGER for tasks whose dependencies are now all completed
+9. Dispatch next unblocked wave
 
 **On QA rejection re-dispatch:** When QA rejects a task and the specialist completes again, steps 2–4 overwrite the token fields with the latest run's values (last-write wins). This is correct — the final delivery's cost is what matters.
 
