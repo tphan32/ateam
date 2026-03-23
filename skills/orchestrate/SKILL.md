@@ -143,7 +143,7 @@ If `fix design`: Re-dispatch `Agent(team-solution-architect)` with issue context
 After Architect completes: Re-dispatch `Agent(team-lead)` to resume.
 If `override`: Instruct Team Lead to resume with paused tasks.
 
-Capture `<usage>` from the Team Lead Agent call as `phase3_usage` (tokens, tool-uses, duration-ms). If Team Lead is re-dispatched after a design fix, accumulate each call's usage into `phase3_usage`. If `<usage>` is absent, set to zeros.
+**Regardless of which outcome occurred above:** Capture `<usage>` from the Team Lead Agent call as `phase3_usage` (tokens, tool-uses, duration-ms). If Team Lead is re-dispatched after a design fix, accumulate each call's usage into `phase3_usage`. If `<usage>` is absent, set to zeros.
 
 ---
 
@@ -189,9 +189,83 @@ Capture `<usage>` from this Agent call as `phase4_usage` (tokens, tool-uses, dur
 
 ---
 
+## Token Computation
+
+After Phase 4 completes and before invoking the finishing skill:
+
+### Step 1: Read specialist task data
+
+1. Read `tasks/LEDGER.md` — for each task row, extract task ID, `tokens`, `duration-ms`
+2. Read all task files in `tasks/completed/` — for each file, extract task ID, `tool-uses`, `wave`, `qa-cycles`
+3. Join on task ID. Skip any task where:
+   - No matching file exists in `tasks/completed/` (task did not complete)
+   - `tokens` is `~` (task did not receive a `<usage>` block)
+
+### Step 2: Compute metrics
+
+Using specialist task data (step 1) and phase usage variables (`phase1_usage`–`phase4_usage`):
+
+**Per-task rows** (one per completed specialist task):
+- Agent role, task ID + title, tokens, tool-uses, duration formatted as `Xm Ys`, `tokens_per_tool_use = tokens / tool-uses` (render `—` if tool-uses is 0)
+
+**Per-phase rows** (one per phase with non-zero usage):
+- Agent name, phase label (e.g. "Phase 1: Intent"), tokens, tool-uses, duration from `phaseN_usage`
+
+**Session total:** sum of all task tokens + all phase tokens; sum of tool-uses; sum of duration-ms
+
+**Most expensive item:** highest-token row across tasks and phases, with percentage of session total
+
+**QA re-run overhead** (omit if no tasks have `qa-cycles > 0`):
+- For each task where `qa-cycles > 0`: estimate re-run cost = `tokens × (qa-cycles / (qa-cycles + 1))`
+- Sum all per-task estimates → single aggregate figure; label as estimated
+
+**Wave bottleneck** (only consider waves with ≥ 1 completed task):
+- Group completed tasks by `wave` field
+- Bottleneck = wave with highest summed `duration-ms`
+- Report: wave number, role(s), total duration
+
+### Step 3: Append Token Usage section to session report
+
+Use the session report path recorded from Phase 4 (do not re-derive from current date).
+Read the file and append after all existing sections:
+
+~~~markdown
+## Token Usage
+
+### By Phase
+
+| Agent | Phase | Tokens | Tool Uses | Duration |
+|-------|-------|--------|-----------|----------|
+| user-proxy | Phase 1: Intent | {N,NNN} | {N} | {Xm Ys} |
+| solution-architect | Phase 2: Design | {N,NNN} | {N} | {Xm Ys} |
+| team-lead | Phase 3: Execution | {N,NNN} | {N} | {Xm Ys} |
+| project-manager | Phase 4: Reporting | {N,NNN} | {N} | {Xm Ys} |
+
+### By Task
+
+| Agent | Task | Tokens | Tool Uses | Duration | Tokens/Tool |
+|-------|------|--------|-----------|----------|-------------|
+| {role} | {NNN}-{slug} | {N,NNN} | {N} | {Xm Ys} | {N,NNN} |
+
+**Session total:** {N,NNN} tokens · {N} tool uses · {Xm Ys}
+
+**Most expensive:** {agent}/{task-or-phase} ({N,NNN} tokens — {N}% of session)
+
+**QA re-run overhead:** {N} tasks had QA cycles — est. {N,NNN} tokens in rejected work ({N}% of session)
+*(omit if no QA re-runs occurred)*
+
+**Wave bottleneck:** Wave {N} ({role(s)}) — {Xm Ys} total
+~~~
+
+### Step 4: Display to user
+
+Print the full Token Usage section (exactly as appended) to the user inline.
+
+---
+
 ## Completion
 
-After reporting completes:
+After token computation and display:
 
 → Invoke `Skill("superpowers:finishing-a-development-branch")`
 
