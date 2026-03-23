@@ -45,6 +45,8 @@ Dispatch `Agent(user-proxy)` with:
 
 Wait for brief to be confirmed at `plan/active/{NNN}-brief-{slug}.md`.
 
+Capture `<usage>` from this Agent call as `phase1_usage` (tokens, tool-uses, duration-ms). If `<usage>` is absent, set `phase1_usage` to zeros.
+
 ---
 
 ## Phase 2: Design
@@ -56,6 +58,8 @@ Dispatch `Agent(team-solution-architect)` with:
 - Instruction to read `plan/PLAN.md` for full context
 
 Wait for design outputs at `plan/active/{NNN}-design-{slug}.md` and any ADR files.
+
+Capture `<usage>` from this Agent call as `phase2_usage` (tokens, tool-uses, duration-ms). If the Architect is re-dispatched for revisions, accumulate each call's usage into `phase2_usage`. If `<usage>` is absent, set to zeros.
 
 ---
 
@@ -139,6 +143,8 @@ If `fix design`: Re-dispatch `Agent(team-solution-architect)` with issue context
 After Architect completes: Re-dispatch `Agent(team-lead)` to resume.
 If `override`: Instruct Team Lead to resume with paused tasks.
 
+Capture `<usage>` from the Team Lead Agent call as `phase3_usage` (tokens, tool-uses, duration-ms). If Team Lead is re-dispatched after a design fix, accumulate each call's usage into `phase3_usage`. If `<usage>` is absent, set to zeros.
+
 ---
 
 ## ⏸ APPROVAL GATE 2
@@ -178,6 +184,8 @@ Dispatch `Agent(team-project-manager)` with all index file paths.
 
 Wait for session report at `reports/sessions/{YYYY-MM-DD}-session.md`
 and confirmation that `reports/STATUS.md` is updated.
+
+Capture `<usage>` from this Agent call as `phase4_usage` (tokens, tool-uses, duration-ms). Record the session report path: use the explicit path returned by PM if available; otherwise derive it as the newest file in `reports/sessions/` (do not re-derive from the current date independently). If `<usage>` is absent, set to zeros.
 
 ---
 
