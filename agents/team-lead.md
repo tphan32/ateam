@@ -77,6 +77,7 @@ When a specialist notifies completion via `inbox/team-lead/unread/`:
      c. If `retry >= 2`: escalate to SKILL.md orchestrator: `RETRY_EXCEEDED: {task-id}` — do not re-dispatch
      d. **Stop processing this completion** — do not move task file
 2. Extract `total_tokens`, `tool_uses`, `duration_ms` from the `<usage>` block in the completion notification
+   If the `<usage>` block is absent from the notification, set `total_tokens`, `tool_uses`, and `duration_ms` to `0` and continue.
 3. Write to the task file at `tasks/ongoing/{task-id}.md` (before moving it):
    - `tokens: {total_tokens}`
    - `tool-uses: {tool_uses}`
