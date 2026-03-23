@@ -162,8 +162,10 @@ read: false
 ## LEDGER.md Row Format
 
 ```
-| {NNN} | {title} | {owner} | {status} | {depends-on or —} | {blocks or —} |
+| {NNN} | {title} | {owner} | {status} | {depends-on or —} | {blocks or —} | {tokens or ~} | {duration-ms or ~} |
 ```
+
+`tokens` and `duration-ms` are initialised to `~` at task creation and populated by Team Lead when a task reaches `completed` status. Tasks that do not complete retain `~`. `tool-uses` is intentionally excluded from LEDGER — it is stored in the task file only.
 
 Valid status values: `pending` | `ongoing` | `completed` | `paused` | `deadlocked`
 
